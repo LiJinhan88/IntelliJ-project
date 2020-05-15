@@ -29,10 +29,9 @@ public class logic {
             }
             number = number/targetBase;
 
-            number = (int) (number - (Math.pow(targetBase, i) * Math.floor(number / Math.pow(targetBase, i))));
         }
         String stringText = "";
-        for(int i=12;i>=0;--i)
+        for(int i=12;i>=0;i = i-1)
             stringText = stringText+text[i];
         return stringText;
     }
