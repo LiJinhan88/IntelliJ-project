@@ -1,0 +1,39 @@
+public class logic {
+    int ConvertTo10(String input, int originalBase) {
+        char[] num = input.toCharArray();
+        int value = 0;
+        int Current = 0;
+        String alphabet = "ABCDEF";
+        int l = input.length();
+        for (int i = 0; i < l; i++) {
+            if(Character.isLetter(num[l-i-1])){
+                Current = alphabet.indexOf(num[l-i-1])+9;
+            }else{
+                Current = (int)Character.forDigit(num[l-i-1]-48,originalBase)-48;
+            }
+            value += Current * Math.pow(originalBase,i);
+        }
+        return value;
+    }
+
+    String Convert10To(int number, int targetBase) {
+        String text[]= new String[]{"0","0","0","0","0","0","0","0","0","0","0","0","0"};
+        String alphabet = " ABCDEF";
+        int x;
+        for (int i = 13; i > 0; i= i-1) {
+            x = number%targetBase;
+            if(x>=10){
+                text[13 - i]=String.valueOf(alphabet.charAt(x-9));
+            }else{
+                text[13 - i]=String.valueOf(x);
+            }
+            number = number/targetBase;
+
+            number = (int) (number - (Math.pow(targetBase, i) * Math.floor(number / Math.pow(targetBase, i))));
+        }
+        String stringText = "";
+        for(int i=12;i>=0;--i)
+            stringText = stringText+text[i];
+        return stringText;
+    }
+}
