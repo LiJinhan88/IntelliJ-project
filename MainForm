@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.lang.Math;
+
+public class MainForm {
+    private JPanel panel1;
+    private JTextArea text1;
+    private JTextArea text2;
+    private JButton convertButton;
+    private JSpinner spinner1;
+    private JSpinner spinner2;
+    private JLabel Number;
+    private JLabel Frombase;
+    private JLabel Result;
+    private JLabel Tobase;
+
+    String alphabet = "ABCDEF";
+    logic l = new logic();
+
+    public MainForm() {
+        convertButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String spinnerText1 = spinner1.getValue().toString();
+                String spinnerText2 = spinner2.getValue().toString();
+                int spinnerint1 = Integer.parseInt(spinnerText1);
+                int spinnerint2 = Integer.parseInt(spinnerText2);
+                String out = l.Convert10To(l.ConvertTo10(text1.getText(), spinnerint1), spinnerint2);
+                text2.setText(out);
+                System.out.println(Integer.parseInt(out));
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new JFrame("my app");
+                frame.setContentPane(new MainForm().panel1);
+                frame.setSize(new Dimension(500,300));
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+            }
+        });
+    }
+}
